@@ -1,0 +1,24 @@
+{
+  "name": "blog-expressjs_4_17_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedoct/blog-expressJS_4_17_1.git"
+  },
+  "author": "victra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codedoct/blog-expressJS_4_17_1/issues"
+  },
+  "homepage": "https://github.com/codedoct/blog-expressJS_4_17_1#readme"
+}
