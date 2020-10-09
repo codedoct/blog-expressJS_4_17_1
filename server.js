@@ -1,15 +1,19 @@
-require('dotenv').config();
+require('dotenv').config()
+require('./db/conn')
 const express = require('express')
 const app = express()
-const port = process.env.PORT;
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const port = process.env.PORT
+const cors = require('cors')
+const bodyParser = require('body-parser')
 
-app.use(cors()); // cors
+const apiV1Router = require('./routes/api/v1')
 
-app.use(bodyParser.json({ limit: '50mb' })); // read data request
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(cors()) // cors
 
+app.use(bodyParser.json({ limit: '50mb' })) // read data request
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
+app.use('/api/v1', apiV1Router)
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
