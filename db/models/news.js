@@ -1,10 +1,10 @@
-const newsSchema = require('../schemas/newsSchema');
-const mongoose = require('mongoose');
+const newsSchema = require('../schemas/newsSchema')
+const mongoose = require('mongoose')
 
-const News = mongoose.model('news', newsSchema);
+const News = mongoose.model('news', newsSchema)
 
 News.createNews = (newNews) => {
-    return newNews.save();
+    return newNews.save()
 }
 
-module.exports = News;
+module.exports = News
