@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const NewsSchema = new Schema({
   title: { type: String },
+  seo_url: { type: String },
   content: { type: String },
   status: { type: Number, default: 1 }, // 0: draft, 1: publish
 
