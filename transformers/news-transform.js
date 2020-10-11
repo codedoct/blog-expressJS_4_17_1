@@ -2,6 +2,11 @@ const transformer = {}
 transformer.showNews = (news) => {
     return newsTransform(news)
 }
+transformer.listNews = (newsList) => {
+    return newsList.map(news => {
+        return newsTransform(news)
+    })
+}
 
 const newsTransform = (data) => {
     return {
