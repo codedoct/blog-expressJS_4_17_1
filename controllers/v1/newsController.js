@@ -11,7 +11,7 @@ app.post('/', async (req,res) => {
         if (validate.error) throw validate.error
 
         const newsExists = await News.findOne({title: req.body.title})
-        if (newsExists) return errorHandler.BadRequest(res, "News is already exists")
+        if (newsExists) return errorHandler.BadRequest(res, "News is already exists.")
 
         if (!req.body.status) delete req.body.status
         req.body.seo_url = formater.generateSeoUrl(req.body.title)
