@@ -1,7 +1,7 @@
 const newsSchema = require('../schemas/newsSchema')
 const mongoose = require('mongoose')
-const mongoosePaginate = require('mongoose-paginate-v2');
-newsSchema.plugin(mongoosePaginate);
+const mongoosePaginate = require('mongoose-paginate-v2')
+newsSchema.plugin(mongoosePaginate)
 
 const News = mongoose.model('news', newsSchema)
 News.createNews = (newNews) => {
@@ -18,6 +18,10 @@ News.findOneByID = (newsID) => {
 
 News.findOneByTitle = (newsTitle) => {
     return News.findOne({title: newsTitle})
+}
+
+News.findOneByIDAndUpdate = (newsID, data) => {
+    return News.findByIdAndUpdate(newsID, data, {new: true})
 }
 
 module.exports = News

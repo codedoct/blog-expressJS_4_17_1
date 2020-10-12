@@ -34,7 +34,7 @@ app.get('/', async (req,res) => {
         }
         
         let sort = {created_at: -1}
-        let query = {title: new RegExp(meta.title, "i")}
+        let query = {deleted_at: null, title: new RegExp(meta.title, "i")}
 
         const options = {
             lean: false,
@@ -58,6 +58,29 @@ app.get('/:news_id', async (req,res) => {
         const newsDetail = await News.findOneByID(req.params.news_id)
         const result = newsTransform.showNews(newsDetail)
 
+        res.json({ status: "OK", result })
+    } catch (err) {
+        errorHandler.UnHandler(res, err)
+    }
+})
+
+app.put('/:news_id', async (req,res) => {
+    try {
+        const validate = validator.createUpdateNews.validate(req.body)
+        if (validate.error) throw validate.error
+
+        const [newsOld, newsNew] = await Promise.all([
+            News.findOneByID(req.params.news_id), 
+            News.findOneByTitle(req.body.title)
+        ])
+        if (!newsOld) return errorHandler.BadRequest(res, "News is not found.")
+        if (newsNew && newsNew.title != newsOld.title) return errorHandler.BadRequest(res, "News title is already exists.")
+
+        if (!req.body.status) delete req.body.status
+        req.body.seo_url = formater.generateSeoUrl(req.body.title)
+        const newsUpdated = await News.findOneByIDAndUpdate(req.params.news_id, req.body)
+        
+        const result = newsTransform.showNews(newsUpdated)
         res.json({ status: "OK", result })
     } catch (err) {
         errorHandler.UnHandler(res, err)
