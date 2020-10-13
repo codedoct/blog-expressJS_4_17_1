@@ -24,4 +24,8 @@ News.findOneByIDAndUpdate = (newsID, data) => {
     return News.findByIdAndUpdate(newsID, data, {new: true})
 }
 
+News.deleteNews = (newsID) => {
+    return News.findByIdAndRemove(newsID)
+}
+
 module.exports = News
