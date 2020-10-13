@@ -87,5 +87,26 @@ app.put('/:news_id', async (req,res) => {
     }
 })
 
+app.delete('/:news_id/soft-delete', async (req,res) => {
+    try {
+        const newsSoftDelete = await News.findOneByIDAndUpdate(req.params.news_id, {deleted_at: new Date()})
+        if (!newsSoftDelete) return errorHandler.BadRequest(res, "News is not found.")
+        
+        res.json({ status: "OK", result: "success" })
+    } catch (err) {
+        errorHandler.UnHandler(res, err)
+    }
+})
+
+app.delete('/:news_id/hard-delete', async (req,res) => {
+    try {
+        const newsHardDelete = await News.deleteNews(req.params.news_id)
+        if (!newsHardDelete) return errorHandler.BadRequest(res, "News is not found.")
+        
+        res.json({ status: "OK", result: "success" })
+    } catch (err) {
+        errorHandler.UnHandler(res, err)
+    }
+})
 
 module.exports = app
