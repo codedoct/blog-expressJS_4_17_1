@@ -16,8 +16,8 @@ app.post('/register', async (req,res) => {
 
         bcrypt.genSalt(10, (err, salt) => {
             if(err) throw err;
-
             bcrypt.hash(req.body.password, salt, async (err, hash) => {
+                if(err) throw err;
                 req.body.password = hash
                 const newUser = new User(req.body)
                 const user = await User.createUser(newUser)
@@ -26,7 +26,6 @@ app.post('/register', async (req,res) => {
                 res.json({ status: "OK", result })
             });
         });
-
     } catch (err) {
         errorHandler.UnHandler(res, err)
     }
@@ -50,6 +49,17 @@ app.post('/login', async (req,res) => {
         const dataToken = `Bearer ${generateToken}`
         const result = userTransform.showUser(updateUser)
         res.json({ status: "OK", token: dataToken, result })
+    } catch (err) {
+        errorHandler.UnHandler(res, err)
+    }
+})
+
+app.post('/logout', authentication.auth, async (req,res) => {
+    try {
+        await User.updateUserNew(req.user._id, {token: null})
+        authentication.redisDelete(req.user.token)
+
+        res.json({ status: "OK", result: "success" })
     } catch (err) {
         errorHandler.UnHandler(res, err)
     }

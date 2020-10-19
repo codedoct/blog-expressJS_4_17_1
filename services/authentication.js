@@ -5,8 +5,8 @@ const errorHandler = require('./error')
 const redis = require('redis')
 const client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST, redis)
 
-const redisPrefix = 'token:'
 const redisKey = (token) => {
+    const redisPrefix = 'token:'
     return redisPrefix + token
 }
 
@@ -46,6 +46,10 @@ authentication.generateToken = () => {
 
 authentication.redisUpsert = (token, data) => {
     return client.set(redisKey(token), JSON.stringify(data), 'EX', 60*60*24*(process.env.REDIS_EXPIRED || 3)) // default 3 days
+}
+
+authentication.redisDelete = (token) => {
+    return client.del(redisKey(token))
 }
 
 module.exports = authentication
