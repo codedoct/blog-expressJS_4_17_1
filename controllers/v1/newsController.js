@@ -5,7 +5,6 @@ const newsTransform = require('../../transformers/news-transform')
 const formater = require('../../utils/formater')
 const constant = require('../../utils/constant')
 const validator = require('../../validators/news')
-const authentication = require('../../services/authentication')
 
 app.post('/', async (req,res) => {
     try {
@@ -27,7 +26,7 @@ app.post('/', async (req,res) => {
     }
 })
 
-app.get('/', authentication.auth, async (req,res) => {
+app.get('/', async (req,res) => {
     try {
         const meta = {
             ...constant.dataMeta(req),
