@@ -1,0 +1,8 @@
+{
+    "apps" : [{
+      "name": "blog-expressjs_4_17_1",
+      "script"    : "server.js",
+      "instances" : "max",
+      "exec_mode" : "cluster" 
+    }]
+}

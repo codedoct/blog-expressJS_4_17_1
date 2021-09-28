@@ -1,4 +1,4 @@
-const newsSchema = require('../schemas/newsSchema')
+const newsSchema = require('~/db/schemas/newsSchema')
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 newsSchema.plugin(mongoosePaginate)

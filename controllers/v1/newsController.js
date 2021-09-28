@@ -1,10 +1,10 @@
 const app = require('express').Router()
-const News = require('../../db/models/news')
-const errorHandler = require('../../services/error')
-const newsTransform = require('../../transformers/news-transform')
-const formater = require('../../utils/formater')
-const constant = require('../../utils/constant')
-const validator = require('../../validators/news')
+const News = require('~/db/models/news')
+const errorHandler = require('~/services/error')
+const newsTransform = require('~/transformers/news-transform')
+const formater = require('~/utils/formater')
+const constant = require('~/utils/constant')
+const validator = require('~/validators/news')
 
 app.post('/', async (req,res) => {
     try {

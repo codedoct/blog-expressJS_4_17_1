@@ -1,9 +1,9 @@
 const app = require('express').Router()
-const User = require('../../db/models/user')
-const errorHandler = require('../../services/error')
-const authentication = require('../../services/authentication')
-const userTransform = require('../../transformers/user-transform')
-const validator = require('../../validators/user')
+const User = require('~/db/models/user')
+const errorHandler = require('~/services/error')
+const authentication = require('~/services/authentication')
+const userTransform = require('~/transformers/user-transform')
+const validator = require('~/validators/user')
 const bcrypt = require('bcryptjs');
 
 app.post('/register', async (req,res) => {

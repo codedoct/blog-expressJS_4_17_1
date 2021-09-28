@@ -1,6 +1,6 @@
 const uuidv4 = require('uuid/v4')
 const bcrypt = require('bcryptjs')
-const User = require('../db/models/user')
+const User = require('~/db/models/user')
 const errorHandler = require('./error')
 const redis = require('redis')
 const client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST, redis)

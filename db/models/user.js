@@ -1,4 +1,4 @@
-const userSchema = require('../schemas/userSchema')
+const userSchema = require('~/db/schemas/userSchema')
 const mongoose = require('mongoose')
 
 const User = mongoose.model('user', userSchema)
