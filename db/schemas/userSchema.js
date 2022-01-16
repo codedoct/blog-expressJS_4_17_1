@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const { getFile } = require('~/services/file');
 
-const NewsSchema = new Schema({
+const UserSchema = new Schema({
   name: { type: String },
+  profile: { type: String },
   email: { type: String },
   password: { type: String },
   address: { type: String },
@@ -15,4 +17,8 @@ const NewsSchema = new Schema({
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 })
 
-module.exports = NewsSchema
+UserSchema.virtual('profile_url').get(function () {
+  return getFile(this.profile);
+});
+
+module.exports = UserSchema

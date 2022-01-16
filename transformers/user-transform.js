@@ -6,6 +6,7 @@ transformer.showUser = (user) => {
 const userTransform = (data) => {
     return {
         id: data._id,
+        profile_url: data.profile_url || null,
         name: data.name || null,
         email: data.email || null,
         address: data.address || null,
