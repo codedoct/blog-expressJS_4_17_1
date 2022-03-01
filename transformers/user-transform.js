@@ -1,7 +1,7 @@
-const transformer = {}
+const transformer = {};
 transformer.showUser = (user) => {
-    return userTransform(user)
-}
+    return userTransform(user);
+};
 
 const userTransform = (data) => {
     return {
@@ -13,8 +13,8 @@ const userTransform = (data) => {
         gender: data.gender || null,
 
         created_at: data.created_at,
-        updated_at: data.updated_at,
-    }
-}
+        updated_at: data.updated_at
+    };
+};
 
-module.exports = transformer
+module.exports = transformer;

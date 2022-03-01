@@ -1,6 +1,6 @@
-const app = require('express').Router()
-const errorHandler = require('~/services/error')
-const authentication = require('~/services/authentication')
+const app = require('express').Router();
+const errorHandler = require('~/services/error');
+const authentication = require('~/services/authentication');
 const { deleteFile, validatePdfUpload, configFile } = require('~/services/file');
 const fs = require('fs');
 const shell = require('shelljs');
@@ -41,4 +41,4 @@ app.post('/compress-pdf', authentication.auth, validatePdfUpload(configFile.comp
     }
 });
 
-module.exports = app
+module.exports = app;

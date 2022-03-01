@@ -1,25 +1,25 @@
 const ErrorLog = require('~/db/models/error_log');
 
-const errorHandler = {}
+const errorHandler = {};
 errorHandler.BadRequest = (res, err) => {
-    res.status(400).json({ status: "error", message: err })
-}
+    res.status(400).json({ status: "error", message: err });
+};
 errorHandler.Unauthorized = (res) => {
-    res.status(401).json({ status: "error", message: "Unauthorized" })
-}
+    res.status(401).json({ status: "error", message: "Unauthorized" });
+};
 errorHandler.NotFound = (res, err) => {
-    res.status(404).json({ status: "error", message: err || "Not found" })
-}
+    res.status(404).json({ status: "error", message: err || "Not found" });
+};
 errorHandler.UnHandler = (res, err) => {
     if (err.name == "ValidationError") {
-        let errorMessage
+        let errorMessage;
         if (err.details) {
-            errorMessage = err.details[0].message
+            errorMessage = err.details[0].message;
         } else {
-            errorMessage = err.message
+            errorMessage = err.message;
         }
 
-        res.status(400).json({ status: "error", message: errorMessage })
+        res.status(400).json({ status: "error", message: errorMessage });
     } else {
         const message = err.toString() || 'Something technically wrong';
         if (err.kind == 'ObjectId') {
@@ -29,7 +29,7 @@ errorHandler.UnHandler = (res, err) => {
             res.status(500).json({ status: 'error', message });
         }
     }
-}
+};
 
 // Private
 const sendErrorLog = async (res, err) => {
@@ -46,4 +46,4 @@ const sendErrorLog = async (res, err) => {
     }));
 };
 
-module.exports = errorHandler
+module.exports = errorHandler;
