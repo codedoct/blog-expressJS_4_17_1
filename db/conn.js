@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const MONGO_HOST = process.env.MONGO_HOST || 'localhost';

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 require('module-alias/register');
 require('dotenv').config();
 require('./db/conn');
