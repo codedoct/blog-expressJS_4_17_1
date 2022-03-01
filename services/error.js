@@ -1,3 +1,5 @@
+const ErrorLog = require('~/db/models/error_log');
+
 const errorHandler = {}
 errorHandler.BadRequest = (res, err) => {
     res.status(400).json({ status: "error", message: err })
@@ -19,9 +21,29 @@ errorHandler.UnHandler = (res, err) => {
 
         res.status(400).json({ status: "error", message: errorMessage })
     } else {
-        let message = err.toString() || "Something technically wrong"
-        res.status(500).json({ status: "error", message })
+        const message = err.toString() || 'Something technically wrong';
+        if (err.kind == 'ObjectId') {
+            res.status(400).json({ status: 'error', message });
+        } else {
+            sendErrorLog(res, err);
+            res.status(500).json({ status: 'error', message });
+        }
     }
 }
+
+// Private
+const sendErrorLog = async (res, err) => {
+    const stack = new Error(err).stack;
+    const header = JSON.stringify(res.req.headers);
+    const body = JSON.stringify(res.req.body);
+
+    await ErrorLog.createErrorLog(new ErrorLog({
+        path: res.req.originalUrl,
+        method: res.req.method,
+        body: body,
+        header: header,
+        log: stack||'Something technically wrong'
+    }));
+};
 
 module.exports = errorHandler
